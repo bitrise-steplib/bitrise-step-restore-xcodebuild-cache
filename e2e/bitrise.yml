@@ -1,0 +1,71 @@
+format_version: "11"
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+
+app:
+  envs:
+  - TEST_APP_URL: https://github.com/bitrise-io/samples-ios-swiftui-bitrise-todos.git
+  - BRANCH: main
+
+workflows:
+  test_xcode_build_cache:
+    after_run:
+    - _setup
+    - _run
+    - _check
+
+  _run:
+    steps:
+    - path::./:
+        title: Execute step
+        run_if: "true"
+        is_skippable: false
+        inputs: []
+
+  _check:
+    steps:
+    - script:
+        title: Check DerivedData folder and cache metada
+        inputs:
+        - content: |
+            #!/usr/bin/env bash
+            set -ex
+
+            echo "TODO: check if DerivedData and metadata is restored"
+  _setup:
+    steps:
+    - script:
+        title: Delete _tmp dir
+        inputs:
+        - content: rm -rf _tmp
+    - git::https://github.com/bitrise-steplib/bitrise-step-simple-git-clone.git:
+        inputs:
+        - repository_url: $TEST_APP_URL
+        - clone_into_dir: ./_tmp
+        - branch: $BRANCH
+    - change-workdir:
+        title: Switch working dir to _tmp
+        inputs:
+        - path: ./_tmp
+    - script@1:
+        title: Build
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            set -o pipefail
+
+            defaults write com.apple.dt.XCBuild IgnoreFileSystemDeviceInodeChanges -bool YES
+
+            xcodebuild build -scheme Bitrise\ TODOs\ Sample CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO
+    - git::https://github.com/bitrise-steplib/bitrise-step-save-xcodebuild-cache.git@prepare-release:
+        title: save cache
+        inputs:
+        - verbose: true
+    - script:
+        title: Delete DerivedData
+        inputs:
+        - content: |
+            #!/usr/bin/env bash
+            set -ex
+
+            rm -rf $HOME/Library/Developer/Xcode/DerivedData

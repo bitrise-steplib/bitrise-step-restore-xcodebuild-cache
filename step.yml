@@ -1,0 +1,58 @@
+title: Restore xcodebuild Bitrise Build Cache
+summary: Restores the DerivedData folder and related metadata used by xcodebuild. Uses the Bitrise Build Cache infrastructure.
+description: |
+  This steps restores the DerivedData folder and the related metadata required to speed up subsequent builds.
+
+website: https://github.com/bitrise-steplib/bitrise-step-restore-xcodebuild-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-restore-xcodebuild-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-restore-xcodebuild-cache
+
+project_type_tags:
+- ios
+- cordova
+- ionic
+- react-native
+- flutter
+
+type_tags:
+- utility
+
+run_if: .IsCI
+is_skippable: true
+
+toolkit:
+  bash:
+    entry_file: step.sh
+
+deps:
+  brew:
+  - name: zstd
+
+inputs:
+- project_root_path: .
+  opts:
+    title: Project root path
+    summary: Path to the root folder of the project to be built
+    description: |-
+      This needs to be set to the root folder of the project to be built. The step takes the metadata of the input files from this folder.
+
+      When the cache is restored, the metadata of the files in this folder is restored as well. This ensures Xcode recognizes the cached DerivedData folder.
+    is_required: false
+
+- cache_key: ""
+  opts:
+    title: Cache key
+    summary: The key of the restorable cache archive
+    description: |-
+      The Bitrise Build Cache stores cache archives under keys. This key is used to identify the cache archive to be restored.      
+      If not specified, the step uses the current git branch name as the key: `xcode-deriveddata-<branch-name>`.
+    is_required: false
+
+- verbose: "false"
+  opts:
+    title: Verbose logging
+    summary: Enable logging additional information for troubleshooting
+    is_required: true
+    value_options:
+    - "true"
+    - "false"
