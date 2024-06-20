@@ -32,7 +32,7 @@ workflows:
 
             derived_data_path="$HOME/Library/Developer/Xcode/DerivedData"
 
-            if [ -d "$derived_data_path" ]; then              
+            if [ -d "$derived_data_path" ]; then
               if [ "$(ls -A "$directory_path")" ]; then
                 echo "Directory exists and is not empty"
               else
