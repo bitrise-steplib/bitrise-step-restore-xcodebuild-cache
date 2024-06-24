@@ -45,7 +45,8 @@ inputs:
     summary: The key of the restorable cache archive
     description: |-
       The Bitrise Build Cache stores cache archives under keys. This key is used to identify the cache archive to be restored.
-      If not specified, the step uses the current git branch name as the key: `xcode-deriveddata-<branch-name>`.
+      If not specified, the step uses the Bitrise app's slug plus the current git branch name as the key: `xcode-deriveddata-<app-slug>-<branch-name>`.
+      Cache keys are shared among the apps of the same workspace so it's recommended to add the current app slug to avoid conflicts.
     is_required: false
 
 - verbose: "false"
