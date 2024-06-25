@@ -20,7 +20,7 @@ workflows:
         run_if: "true"
         is_skippable: false
         inputs:
-        - cache_key: restore-xcodebuild-e2e-test
+        - cache_key: restore-xcodebuild-e2e-test-$BITRISE_BUILD_SLUG
         - verbose: true
 
   _check:
@@ -82,7 +82,7 @@ workflows:
     - git::https://github.com/bitrise-steplib/bitrise-step-save-xcodebuild-cache.git@prepare-release:
         title: save cache
         inputs:
-        - cache_key: restore-xcodebuild-e2e-test
+        - cache_key: restore-xcodebuild-e2e-test-$BITRISE_BUILD_SLUG
         - verbose: true
     - script:
         title: Delete DerivedData
