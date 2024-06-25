@@ -3,6 +3,10 @@ summary: Restores the DerivedData folder and related metadata used by xcodebuild
 description: |
   This steps restores the DerivedData folder and the related metadata required to speed up subsequent builds.
 
+  As xcodebuild only reuses DerivedData if the input files' modification time is the same, the step also restores the modification time of the input files (project files including source code files) from a metadata file stored along the
+  DerivedData folder. Please use the same build settings as when the cache was saved to ensure the cache can be reused.
+
+  NOTE: you need to have an activate Bitrise Build Cache Trial or Subscription for your workspace to use this step.
 website: https://github.com/bitrise-steplib/bitrise-step-restore-xcodebuild-cache
 source_code_url: https://github.com/bitrise-steplib/bitrise-step-restore-xcodebuild-cache
 support_url: https://github.com/bitrise-steplib/bitrise-step-restore-xcodebuild-cache

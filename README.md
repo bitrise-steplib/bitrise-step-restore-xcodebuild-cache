@@ -10,7 +10,7 @@ Restores the DerivedData folder and the related metadata from Bitrise Build Cach
 This step is the pair of the [save-xcodebuild-cache step](https://github.com/bitrise-steplib/bitrise-step-save-xcodebuild-cache) and can be used to restore xcodebuild cache archives from the Bitrise Build Cache. 
 
 As xcodebuild only reuses DerivedData if the input files' modification time is the same, the step also restores the modification time of the input files (project files including source code files) from a metadata file stored along the
-DerivedData folder. Please use the same build settings/settingsas when the cache was saved to ensure the cache is restored correctly.
+DerivedData folder. Please use the same build settings as when the cache was saved to ensure the cache can be reused.
 
 NOTE: you need to have an activate Bitrise Build Cache Trial or Subscription for your workspace to use this step.
 
@@ -30,7 +30,7 @@ You can also run this step directly with [Bitrise CLI](https://github.com/bitris
 | Key | Description | Flags | Default |
 | --- | --- | --- | --- |
 | `project_root_path` | Path to the root folder of the project to be built | required | `.` |
-| `cache_key` | Path to the root folder of the project to be built |  |  |
+| `cache_key` | The key of the restorable cache archive |  |  |
 | `verbose` | Enable logging additional information for troubleshooting | required | `false` |
 </details>
 
