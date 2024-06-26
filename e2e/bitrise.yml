@@ -79,7 +79,7 @@ workflows:
             defaults write com.apple.dt.XCBuild IgnoreFileSystemDeviceInodeChanges -bool YES
 
             xcodebuild build -scheme Bitrise\ TODOs\ Sample CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO
-    - git::https://github.com/bitrise-steplib/bitrise-step-save-xcodebuild-cache.git@prepare-release:
+    - git::https://github.com/bitrise-steplib/bitrise-step-save-xcodebuild-cache.git@main:
         title: save cache
         inputs:
         - cache_key: restore-xcodebuild-e2e-test-$BITRISE_BUILD_SLUG
