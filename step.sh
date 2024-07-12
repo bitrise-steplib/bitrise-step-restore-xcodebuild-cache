@@ -34,10 +34,6 @@ curl --retry 5 -sSfL 'https://raw.githubusercontent.com/bitrise-io/bitrise-build
 # the cli command without the -d flag
 cmd="/tmp/bin/bitrise-build-cache restore-xcode-deriveddata --project-root $project_root_path"
 
-if [ -n "$cache_key" ]; then
-  cmd="$cmd --key $cache_key"
-fi
-
 if [ "$verbose" = "true" ]; then
   cmd="$cmd -d"
 fi
