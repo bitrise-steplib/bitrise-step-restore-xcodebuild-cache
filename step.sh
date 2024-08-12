@@ -32,7 +32,7 @@ export BITRISE_BUILD_CACHE_CLI_VERSION=${BITRISE_BUILD_CACHE_CLI_VERSION:="v0.15
 curl --retry 5 -sSfL 'https://raw.githubusercontent.com/bitrise-io/bitrise-build-cache-cli/main/install/installer.sh' | sh -s -- -b /tmp/bin -d $BITRISE_BUILD_CACHE_CLI_VERSION
 
 # the cli command without the -d flag
-cmd="/tmp/bin/bitrise-build-cache restore-xcode-deriveddata --project-root $project_root_path"
+cmd="/tmp/bin/bitrise-build-cache restore-xcode-deriveddata-files --project-root $project_root_path"
 
 if [ "$verbose" = "true" ]; then
   cmd="$cmd -d"
