@@ -28,11 +28,11 @@ echo "Bitrise Build Cache is activated in this workspace"
 set -x
 
 # download the Bitrise Build Cache CLI
-export BITRISE_BUILD_CACHE_CLI_VERSION=${BITRISE_BUILD_CACHE_CLI_VERSION:="v0.15.0-beta.6+xcode"}
+export BITRISE_BUILD_CACHE_CLI_VERSION=${BITRISE_BUILD_CACHE_CLI_VERSION:="v0.15.0-beta.7+xcode"}
 curl --retry 5 -sSfL 'https://raw.githubusercontent.com/bitrise-io/bitrise-build-cache-cli/main/install/installer.sh' | sh -s -- -b /tmp/bin -d $BITRISE_BUILD_CACHE_CLI_VERSION
 
 # the cli command without the -d flag
-cmd="/tmp/bin/bitrise-build-cache restore-xcode-deriveddata-files --project-root $project_root_path"
+cmd="/tmp/bin/bitrise-build-cache restore-xcode-deriveddata-files --project-root $project_root_path  --force-overwrite-files=$force_overwrite_files"
 
 if [ "$verbose" = "true" ]; then
   cmd="$cmd -d"
