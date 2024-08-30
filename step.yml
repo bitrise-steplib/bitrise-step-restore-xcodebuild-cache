@@ -43,6 +43,15 @@ inputs:
       When the cache is restored, the metadata of the files in this folder is restored as well. This ensures Xcode recognizes the cached DerivedData folder.
     is_required: false
 
+- force_overwrite_files: "false"
+  opts:
+    title: Force overwrite files
+    summary: Overwrite existing files even if the permissions do not allow it
+    is_required: true
+    value_options:
+    - "true"
+    - "false"
+
 - verbose: "false"
   opts:
     title: Verbose logging
