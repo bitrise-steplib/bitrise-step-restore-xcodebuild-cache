@@ -32,10 +32,18 @@ export BITRISE_BUILD_CACHE_CLI_VERSION=${BITRISE_BUILD_CACHE_CLI_VERSION:="v0.15
 curl --retry 5 -sSfL 'https://raw.githubusercontent.com/bitrise-io/bitrise-build-cache-cli/main/install/installer.sh' | sh -s -- -b /tmp/bin -d $BITRISE_BUILD_CACHE_CLI_VERSION
 
 # the cli command without the -d flag
-cmd="/tmp/bin/bitrise-build-cache restore-xcode-deriveddata-files --project-root $project_root_path --force-overwrite-files=$force_overwrite_files --skip-existing-files=$skip_existing_files"
+cmd="/tmp/bin/bitrise-build-cache restore-xcode-deriveddata-files --project-root $project_root_path"
 
 if [ "$verbose" = "true" ]; then
   cmd="$cmd -d"
+fi
+
+if [ "$force_overwrite_files" = "true" ]; then
+  cmd="$cmd --force-overwrite-files"
+fi
+
+if [ "$skip_existing_files" = "true" ]; then
+  cmd="$cmd --skip-existing-files"
 fi
 
 $cmd

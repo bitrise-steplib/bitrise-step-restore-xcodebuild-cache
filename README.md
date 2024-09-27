@@ -7,7 +7,7 @@ Restores the DerivedData folder and related metadata used by xcodebuild. Uses th
 <details>
 <summary>Description</summary>
 
-This steps restores the DerivedData folder and the related metadata required to speed up subsequent builds.
+This step restores the DerivedData folder and the related metadata required to speed up subsequent builds.
 
 As xcodebuild only reuses DerivedData if the input files' modification time is the same, the step also restores the modification time of the input files (project files including source code files) from a metadata file stored along the
 DerivedData folder. Please use the same build settings as when the cache was saved to ensure the cache can be reused.
