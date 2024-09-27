@@ -52,6 +52,15 @@ inputs:
     - "true"
     - "false"
 
+- skip_existing_files: "false"
+  opts:
+    title: Skip existing files
+    summary: Skip downloading and overwriting existing files
+    is_required: true
+    value_options:
+    - "true"
+    - "false"
+
 - verbose: "false"
   opts:
     title: Verbose logging
